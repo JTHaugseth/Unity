@@ -8,11 +8,12 @@ public class Gun : MonoBehaviour
 
     public Camera fpsCam;
     public ParticleSystem muzzleFlash;
+    public GameObject impactEffect;
 
     
     void Update()
     {
-        if (Input.GetButtonDown("Fire1")) {
+        if (Input.GetMouseButtonDown(0)) {
             Shoot();    
         }
     }
@@ -29,6 +30,8 @@ public class Gun : MonoBehaviour
             if(enemy != null) {
                 enemy.TakeDamage(damage);
             }
+            GameObject impactGO = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
+            Destroy(impactGO, 1f);
         }
     }
 }
